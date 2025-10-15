@@ -4,10 +4,30 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OauthClientController;
 use App\Http\Controllers\Auth\SocialiteController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\CustomAuthorizationController;
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        return redirect()->route('portal');
+    }
+
+    // Paksa setelah login mendarat ke /portal
+    session()->put('url.intended', route('portal'));
+
+    return redirect()->route('login');
+})->name('home');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/portal', function () {
+        $apps = collect(config('apps', []));
+        // TODO: jika ada role-based filtering
+        return view('portal.index', ['apps' => $apps]);
+    })->name('portal');
 });
 
 Route::get('/dashboard', function () {
@@ -36,5 +56,14 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         ->name('passport.authorizations.authorize');
 });
 
+Route::get('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+
+    $redirect = request('redirect', '/');
+    // (opsional) whitelist origin untuk cegah open redirect
+    return redirect($redirect);
+})->name('sso.logout');
 
 require __DIR__.'/auth.php';
