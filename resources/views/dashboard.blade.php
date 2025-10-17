@@ -5,13 +5,16 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+    <div class="py-6">
+        <div class="grid md:grid-cols-3 gap-4">
+            @forelse($apps as $app)
+                <a href="{{ $app['url'] }}" class="block border rounded-xl p-4 hover:bg-gray-50">
+                    <div class="text-lg font-semibold">{{ $app['name'] }}</div>
+                    <div class="text-sm text-gray-500">{{ $app['desc'] ?? '' }}</div>
+                </a>
+            @empty
+                <p class="text-gray-500">Belum ada aplikasi.</p>
+            @endforelse
         </div>
     </div>
 </x-app-layout>
