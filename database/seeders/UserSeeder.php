@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         // Admin (akan di-update kalau sudah ada email yang sama)
         User::updateOrCreate(
-            ['email' => 'rahardan@gmail.com'],
+            ['email' => 'bluepylox@gmail.com'],
             [
                 'name'              => 'Rahardan',
                 'password'          => Hash::make('password'), // ganti sesuai mau

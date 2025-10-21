@@ -4,7 +4,7 @@ return [
         'key'  => 'inventory',
         'name' => 'Inventory',
         'desc' => 'Manajemen stok & transaksi',
-        'url'  => 'http://inventory.local.test:8080',
+        'url'  => 'http://localhost:8080',
         'icon' => '/images/apps/inventory.svg',
         // 'roles'=> ['admin','staff'],
     ],
