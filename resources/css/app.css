@@ -1,3 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-sans antialiased;
+    }
+}
+
+@layer components {
+    /* Custom input focus styles */
+    .input-focus {
+        @apply focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200;
+    }
+
+    /* Button hover effect */
+    .btn-primary {
+        @apply bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 ease-in-out;
+    }
+
+    /* Card shadow */
+    .card-shadow {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Glassmorphism effect */
+    .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+@layer utilities {
+    /* Custom animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fadeIn {
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    /* Pulse animation for online badge */
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    /* Float animation */
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+}

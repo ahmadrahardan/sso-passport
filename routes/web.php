@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\Auth\CustomAuthorizationController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // Route::get('/', function () {
 //     if (Auth::check()) {
@@ -24,11 +24,11 @@ use App\Http\Controllers\Auth\CustomAuthorizationController;
 //     return redirect()->route('login');
 // })->name('home');
 
-Route::get('/', function () {
-    if (Auth::check()) return redirect()->route('dashboard');
-    session()->put('url.intended', route('dashboard'));
-    return redirect()->route('login');
-})->name('home');
+// Route::get('/', function () {
+//     if (Auth::check()) return redirect()->route('dashboard');
+//     session()->put('url.intended', route('dashboard'));
+//     return redirect()->route('login');
+// })->name('home');
 
 // Route::middleware(['auth', PreventBackHistory::class])->group(function () {
 //     Route::get('/portal', function () {

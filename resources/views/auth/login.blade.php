@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -49,4 +49,28 @@
             </div>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
+
+@extends('layouts.auth')
+
+@section('title', 'Single Sign On')
+
+@section('content')
+<div class="w-full max-w-6xl">
+    <!-- Fixed Height Card Container -->
+    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row h-auto md:h-[600px]">
+        <!-- Left Section - Login Form -->
+        <div class="w-full md:w-1/2 p-8 md:p-12 flex items-center">
+            <div class="w-full">
+                @include('auth.partials.login-form')
+            </div>
+        </div>
+
+        <!-- Right Section - Office Image -->
+        <div class="hidden md:block md:w-1/2 relative">
+            @include('auth.partials.hero-image')
+        </div>
+    </div>
+</div>
+@endsection
+
