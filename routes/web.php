@@ -9,43 +9,17 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\Auth\CustomAuthorizationController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/', function () {
-//     if (Auth::check()) {
-//         return redirect()->route('portal');
-//     }
-
-//     // Paksa setelah login mendarat ke /portal
-//     session()->put('url.intended', route('portal'));
-
-//     return redirect()->route('login');
-// })->name('home');
-
 Route::get('/', function () {
     if (Auth::check()) return redirect()->route('dashboard');
     session()->put('url.intended', route('dashboard'));
     return redirect()->route('login');
 })->name('home');
 
-// Route::middleware(['auth', PreventBackHistory::class])->group(function () {
-//     Route::get('/portal', function () {
-//         $apps = collect(config('apps', []));
-//         return view('portal.index', ['apps' => $apps]);
-//     })->name('portal');
-// });
-
 Route::get('/dashboard', function () {
     $apps = collect(config('apps', []));
     return view('dashboard', compact('apps'));
 })->middleware(['auth', PreventBackHistory::class])
     ->name('dashboard');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -69,7 +43,6 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 });
 
 Route::get('/logout', function () {
-    // (opsional) revoke semua token Passport milik user
     if (Auth::check()) {
         $uid = Auth::id();
         DB::table('oauth_access_tokens')->where('user_id', $uid)->update(['revoked' => true]);
@@ -85,10 +58,9 @@ Route::get('/logout', function () {
     $fallback = route('dashboard');
     $redirect = request('redirect', $fallback);
 
-    // whitelist anti open-redirect — domain yang  dipakai
     $allowed = [
-        'http://sso.local.test:8000',
-        'http://inventory.local.test:8080',
+        'http://localhost:8000',
+        'http://localhost:8080',
         // tambahkan domain produksi di sini
     ];
     $ok = collect($allowed)->contains(fn($base) => str_starts_with($redirect, $base));
