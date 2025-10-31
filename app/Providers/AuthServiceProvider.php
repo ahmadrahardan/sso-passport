@@ -14,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::authorizationView('oauth.authorize');
 
         Passport::loadKeysFrom(storage_path('oauth'));
-        Passport::tokensExpireIn(now()->addDays(15));
+        Passport::tokensExpireIn(now()->addMinutes(60));
         Passport::refreshTokensExpireIn(now()->addDays(30));
         Passport::personalAccessTokensExpireIn(now()->addMonths(6));
     }
