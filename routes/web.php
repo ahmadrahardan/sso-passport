@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\PreventBackHistory;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OauthClientController;
 use App\Http\Controllers\Auth\SocialiteController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\Auth\CustomAuthorizationController;
 
 Route::get('/', function () {
@@ -37,11 +38,13 @@ Route::get('/', function () {
 //     })->name('portal');
 // });
 
-Route::get('/dashboard', function () {
-    $apps = collect(config('apps', []));
-    return view('dashboard', compact('apps'));
-})->middleware(['auth', PreventBackHistory::class])
-    ->name('dashboard');
+// Route::get('/dashboard', function () {
+//     $apps = collect(config('apps', []));
+//     return view('dashboard', compact('apps'));
+// })->middleware(['auth', PreventBackHistory::class])
+//     ->name('dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
