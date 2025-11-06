@@ -1,20 +1,25 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-6">
-        <div class="grid md:grid-cols-3 gap-4">
-            @forelse($apps as $app)
-                <a href="{{ $app['url'] }}" class="block border rounded-xl p-4 hover:bg-gray-50">
-                    <div class="text-lg font-semibold">{{ $app['name'] }}</div>
-                    <div class="text-sm text-gray-500">{{ $app['desc'] ?? '' }}</div>
-                </a>
-            @empty
-                <p class="text-gray-500">Belum ada aplikasi.</p>
-            @endforelse
+@section('title', 'Dashboard SSO')
+
+@section('content')
+<div class="min-h-screen flex items-center justify-center px-4 py-12"
+     style="background-image: url('{{ asset('images/BG Dashboard.png') }}'); background-size: cover; background-position: center;">
+
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+
+            <!-- Left Card -->
+            <div class="lg:col-span-8 bg-white/30 rounded-2xl shadow-2xl p-12 lg:p-16 flex flex-col items-center justify-center min-h-[500px]">
+                @include('dashboard.partials.simba-card')
+            </div>
+
+            <!-- Right Card -->
+            <div class="lg:col-span-4 bg-blue-900/30 rounded-2xl shadow-2xl p-8 lg:p-10 flex flex-col items-center justify-between min-h-[500px]">
+                @include('dashboard.partials.profile-card')
+            </div>
+
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection
