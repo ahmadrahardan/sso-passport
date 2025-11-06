@@ -14,24 +14,22 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Admin (akan di-update kalau sudah ada email yang sama)
-        User::updateOrCreate(
+        $super = User::updateOrCreate(
             ['email' => 'bluepylox@gmail.com'],
-            [
-                'name'              => 'Rahardan',
-                'password'          => Hash::make('password'), // ganti sesuai mau
-                'email_verified_at' => now(),
-            ]
+            ['name' => 'Rahardan', 'password' => Hash::make('password')]
         );
+        $super->syncRoles(['super-admin']); // ⬅️ jadi super admin
 
-        // User biasa contoh
-        User::updateOrCreate(
-            ['email' => 'almas@gmail.com'],
-            [
-                'name'              => 'Almas',
-                'password'          => Hash::make('password'),
-                'email_verified_at' => now(),
-            ]
+        $ppk = User::updateOrCreate(
+            ['email' => 'timppk@gmail.com'],
+            ['name' => 'TimPPK', 'password' => Hash::make('password')]
         );
+        $ppk->syncRoles(['tim-ppk']);
+
+        $instalasi = User::updateOrCreate(
+            ['email' => 'instalasi@gmail.com'],
+            ['name' => 'Instalasi', 'password' => Hash::make('password')]
+        );
+        $instalasi->syncRoles(['instalasi']);
     }
 }
