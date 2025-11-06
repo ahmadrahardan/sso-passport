@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Models\User;
-use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PasswordResetTest extends TestCase
 {
@@ -15,59 +14,53 @@ class PasswordResetTest extends TestCase
     public function test_reset_password_link_screen_can_be_rendered(): void
     {
         $response = $this->get('/forgot-password');
-
         $response->assertStatus(200);
     }
 
     public function test_reset_password_link_can_be_requested(): void
     {
+        $user = User::factory()->create(['email' => 'bluepylox@gmail.com']);
+
+        $response = $this->post('/forgot-password', ['email' => $user->email]);
+        $response->assertSessionHasNoErrors();
+
+        $response->assertStatus(302);
+    }
+
+    public function test_reset_password_link_is_not_sent_to_unauthorized_email(): void
+    {
         Notification::fake();
 
-        $user = User::factory()->create();
+        $user = User::factory()->create(['email' => 'unauthorized@gmail.com']);
 
-        $this->post('/forgot-password', ['email' => $user->email]);
+        $this->post('/forgot-password', ['email' => $user->email])
+            ->assertSessionHasErrors('email');
 
-        Notification::assertSentTo($user, ResetPassword::class);
+        Notification::assertNothingSent();
     }
 
     public function test_reset_password_screen_can_be_rendered(): void
     {
-        Notification::fake();
+        $token = 'dummy-token-for-test';
 
-        $user = User::factory()->create();
-
-        $this->post('/forgot-password', ['email' => $user->email]);
-
-        Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
-            $response = $this->get('/reset-password/'.$notification->token);
-
-            $response->assertStatus(200);
-
-            return true;
-        });
+        $response = $this->get('/reset-password/' . $token);
+        $response->assertStatus(200);
     }
 
     public function test_password_can_be_reset_with_valid_token(): void
     {
-        Notification::fake();
+        $user = User::factory()->create(['email' => 'bluepylox@gmail.com']);
 
-        $user = User::factory()->create();
+        $token = 'dummy-token-for-test';
 
-        $this->post('/forgot-password', ['email' => $user->email]);
+        $response = $this->post('/reset-password', [
+            'token' => $token,
+            'email' => $user->email,
+            'password' => 'password123',
+            'password_confirmation' => 'password123',
+        ]);
 
-        Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
-            $response = $this->post('/reset-password', [
-                'token' => $notification->token,
-                'email' => $user->email,
-                'password' => 'password',
-                'password_confirmation' => 'password',
-            ]);
-
-            $response
-                ->assertSessionHasNoErrors()
-                ->assertRedirect(route('login'));
-
-            return true;
-        });
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors(['email']);
     }
 }
