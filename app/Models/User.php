@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\ClientRole;
 
 use Illuminate\Support\HtmlString;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -29,7 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        // 'role',
     ];
 
     /**
@@ -55,9 +56,23 @@ class User extends Authenticatable
         ];
     }
 
-    public function hasRole(string $role): bool
+    // public function hasRole(string $role): bool
+    // {
+    //     return strtolower($this->role ?? '') === strtolower($role);
+    // }
+
+    public function clientRoles()
     {
-        return strtolower($this->role ?? '') === strtolower($role);
+        return $this->hasMany(ClientRole::class);
+    }
+
+    public function rolesForClient($clientId)
+    {
+        return $this->clientRoles()
+            ->where('client_id', $clientId)
+            ->with('role')
+            ->get()
+            ->pluck('role.name');
     }
 
     public function sendPasswordResetNotification($token)

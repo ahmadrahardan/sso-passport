@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -19,6 +19,11 @@ class OauthClientController extends Controller
 
         return view('clients.index', compact('clients'));
     }
+
+    // public function index()
+    // {
+    //     dd('Index jalan');
+    // }
 
     public function create()
     {

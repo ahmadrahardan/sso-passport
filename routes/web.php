@@ -5,10 +5,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\PreventBackHistory;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OauthClientController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\CustomAuthorizationController;
+use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\Admin\ClientRoleController;
 
 Route::get('/', function () {
     if (Auth::check()) return redirect()->route('dashboard');
@@ -67,5 +68,16 @@ Route::get('/logout', function () {
     $ok = collect($allowed)->contains(fn($base) => str_starts_with($redirect, $base));
     return redirect($ok ? $redirect : $fallback);
 })->name('sso.logout');
+
+Route::middleware(['auth', 'role:super-admin'])->group(function () {
+
+    // CRUD User
+    Route::resource('users', UserManagementController::class);
+
+    // Role per Client
+    Route::get('/client-role/{user}/edit', [ClientRoleController::class, 'edit'])->name('client-role.edit');
+    Route::post('/client-role/{user}', [ClientRoleController::class, 'store'])->name('client-role.store');
+});
+
 
 require __DIR__ . '/auth.php';
