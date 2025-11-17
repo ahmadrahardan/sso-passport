@@ -1,44 +1,83 @@
-@extends('layouts.app')
+<x-admin-layout title="Kelola Akun">
 
-@section('content')
-    <div class="container">
+    <div class="max-w-6xl mx-auto">
 
-        <h3 class="mb-4">User Management</h3>
+        {{-- Header --}}
+        <div class="text-center mb-6">
+            <h2 class="text-xl font-bold border-b-2 inline-block pb-1">
+                Daftar Data Akun Pengguna
+            </h2>
+        </div>
 
-        <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">+ Tambah User</a>
+        {{-- Card Container --}}
+        <div class="bg-white p-6 rounded-xl shadow-md">
 
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-
-                        <td>
-                            <a href="{{ route('users.edit', $user) }}" class="btn btn-warning btn-sm">Edit</a>
-
-                            <a href="{{ route('client-role.edit', $user) }}" class="btn btn-info btn-sm">
-                                Role per Client
-                            </a>
-
-                            <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline">
-                                @csrf @method('DELETE')
-                                <button onclick="return confirm('Hapus user?')" class="btn btn-danger btn-sm">Hapus</button>
-                            </form>
-
-                        </td>
+            {{-- Table --}}
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="text-gray-600 border-b">
+                        {{-- <th class="py-3">Foto Akun</th> --}}
+                        <th class="py-3">Username</th>
+                        <th class="py-3">Email</th>
+                        <th class="py-3">Tanggal dibuat</th>
+                        <th class="py-3">Aksi</th>
                     </tr>
-                @endforeach
-            </tbody>
+                </thead>
 
-        </table>
+                <tbody>
+                    @foreach ($users as $user)
+                        <tr class="border-b hover:bg-gray-50 transition">
+
+                            {{-- Foto --}}
+                            {{-- <td class="py-3 text-center">
+                                <img src="/avatar/user.png" class="w-10 h-10 rounded-full mx-auto">
+                            </td> --}}
+
+                            {{-- Username --}}
+                            <td class="py-3 text-center">
+                                {{ $user->name }}
+                            </td>
+
+                            {{-- Email --}}
+                            <td class="py-3 text-center">
+                                {{ $user->email }}
+                            </td>
+
+                            {{-- Tanggal --}}
+                            <td class="py-3 text-center">
+                                {{ $user->created_at->format('d F Y') }}
+                            </td>
+
+                            {{-- Aksi --}}
+                            <td class="py-3 text-center flex gap-2 justify-center">
+
+                                {{-- Edit --}}
+                                <a href="{{ route('users.edit', $user) }}"
+                                    class="inline-flex items-center gap-1 bg-gray-200 px-3 py-1 rounded-lg hover:bg-gray-300">
+                                    <i class="fa fa-edit"></i> Edit
+                                </a>
+
+                                {{-- Role per Client --}}
+                                <a href="{{ route('client-role.edit', $user) }}"
+                                    class="inline-flex items-center gap-1 bg-blue-200 px-3 py-1 rounded-lg hover:bg-blue-300">
+                                    <i class="fa fa-key"></i> Role Client
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+        </div>
+
+        {{-- Floating Add Button --}}
+        <a href="{{ route('users.create') }}"
+            class="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg">+
+            <i class="fa fa-plus text-xl"></i>
+        </a>
+
     </div>
-@endsection
+
+</x-admin-layout>
