@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Edit OAuth Client') }}
@@ -21,7 +21,7 @@
                         <div class="mt-4">
                             <label for="redirect" class="block font-medium text-sm text-gray-700">Redirect URL</label>
                             <input id="redirect" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" type="url" name="redirect" value="{{ old('redirect', $client->redirect_uris[0] ?? '')}}" required />
-                             <p class="mt-2 text-sm text-gray-500">URL lengkap callback aplikasi Anda.</p>
+                            <p class="mt-2 text-sm text-gray-500">URL lengkap callback aplikasi Anda.</p>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
@@ -37,4 +37,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>

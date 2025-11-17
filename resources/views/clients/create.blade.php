@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create New OAuth Client') }}
@@ -14,7 +14,7 @@
 
                         <div>
                             <label for="name" class="block font-medium text-sm text-gray-700">Client Name</label>
-                            <input id="name" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm @error('name') border-red-500 @enderror" type="text" name="name" value="{{ old('name') }}" required autofocus />
+                            <input id="name" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm {{ $errors->has('name') ? 'border-red-500' : '' }}" type="text" name="name" value="{{ old('name') }}" required autofocus />
                             @error('name')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -22,7 +22,7 @@
 
                         <div class="mt-4">
                             <label for="redirect" class="block font-medium text-sm text-gray-700">Redirect URL</label>
-                            <input id="redirect" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm @error('redirect') border-red-500 @enderror" type="url" name="redirect" value="{{ old('redirect') }}" required />
+                            <input id="redirect" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm {{ $errors->has('name') ? 'border-red-500' : '' }}" type="url" name="redirect" value="{{ old('redirect') }}" required />
                             <p class="mt-2 text-sm text-gray-500">URL lengkap callback aplikasi Anda.</p>
                             @error('redirect')
                                 <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -42,4 +42,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>
