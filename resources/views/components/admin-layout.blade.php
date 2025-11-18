@@ -42,20 +42,11 @@
                     </li>
 
                     {{-- Clients --}}
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('clients.index') }}"
                             class="block px-6 py-3 hover:bg-blue-600
                             {{ request()->is('clients*') ? 'bg-blue-600' : '' }}">
                             Kelola Client
-                        </a>
-                    </li>
-
-                    {{-- Role per Client --}}
-                    {{-- <li>
-                        <a href=""
-                            class="block px-6 py-3 hover:bg-blue-600
-                            {{ request()->is('client-role*') ? 'bg-blue-600' : '' }}">
-                            Monitoring
                         </a>
                     </li> --}}
 
