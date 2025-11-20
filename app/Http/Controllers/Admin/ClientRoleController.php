@@ -38,6 +38,12 @@ class ClientRoleController extends Controller
             ]
         );
 
+        $role = Role::find($request->role_id);
+
+        if ($role) {
+            $user->syncRoles([$role->name]);
+        }
+
         return back()->with('success', 'Role berhasil diatur untuk client ini.');
     }
 }
