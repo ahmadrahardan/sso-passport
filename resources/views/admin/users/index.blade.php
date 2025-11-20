@@ -1,22 +1,21 @@
 <x-admin-layout title="Kelola Akun">
 
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-6xl mx-auto bg-slate-50 p-6 rounded-xl shadow-md">
 
         {{-- Header --}}
         <div class="text-center mb-6">
-            <h2 class="text-xl font-bold border-b-2 inline-block pb-1">
+            <h2 class="text-xl font-bold text-blue-900 border-b-2 inline-block pb-1">
                 Daftar Data Akun Pengguna
             </h2>
         </div>
 
         {{-- Card Container --}}
-        <div class="bg-white p-6 rounded-xl shadow-md">
+        <div class="p-6 rounded-xl ">
 
             {{-- Table --}}
             <table class="w-full text-sm">
                 <thead>
                     <tr class="text-gray-600 border-b">
-                        {{-- <th class="py-3">Foto Akun</th> --}}
                         <th class="py-3">Username</th>
                         <th class="py-3">Email</th>
                         <th class="py-3">Tanggal dibuat</th>
@@ -26,12 +25,7 @@
 
                 <tbody>
                     @foreach ($users as $user)
-                        <tr class="border-b hover:bg-gray-50 transition">
-
-                            {{-- Foto --}}
-                            {{-- <td class="py-3 text-center">
-                                <img src="/avatar/user.png" class="w-10 h-10 rounded-full mx-auto">
-                            </td> --}}
+                        <tr class="border-b hover:bg-gray-200 transition bg-white rounded-xl">
 
                             {{-- Username --}}
                             <td class="py-3 text-center">
@@ -62,9 +56,7 @@
                                     class="inline-flex items-center gap-1 bg-blue-200 px-3 py-1 rounded-lg hover:bg-blue-300">
                                     <i class="fa fa-key"></i> Role Client
                                 </a>
-
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>

@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('images/logoRSDB.png') }}" type="image/png">
 
-    <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title') - {{ config('app.name', 'RSD Balung') }}</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-gradient-to-br from-blue-50 to-indigo-100">
+<body class="font-sans antialiased" style="background-image: url('{{ asset('images/background.png') }}'); background-size: cover; background-position: center;">
     <div class="min-h-screen flex items-center justify-center px-4 py-12">
         @yield('content')
     </div>

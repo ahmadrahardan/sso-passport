@@ -2,8 +2,8 @@
 return [
     [
         'key'  => 'inventory',
-        'name' => 'Inventory',
-        'desc' => 'Manajemen stok & transaksi',
+        'name' => 'SIMBA',
+        'desc' => 'Sistem Informasi Manajemen Inventory',
         'url'  => 'http://localhost:8080',
         'icon' => '/images/apps/inventory.svg',
         // 'roles'=> ['admin','staff'],

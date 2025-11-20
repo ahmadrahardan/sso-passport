@@ -29,7 +29,7 @@
                 </label>
                 <input type="email" id="email" name="email" placeholder="Email"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2
-                           focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
+                            focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
                     value="{{ old('email', $request->email) }}" required autofocus>
                 @error('email')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -43,7 +43,7 @@
                 </label>
                 <input type="password" id="password" name="password" placeholder="Password Baru"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2
-                           focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
+                            focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
                     required>
                 @error('password')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -58,7 +58,7 @@
                 <input type="password" id="password_confirmation" name="password_confirmation"
                     placeholder="Konfirmasi Password Baru"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2
-                           focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
+                            focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out"
                     required>
                 @error('password_confirmation')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -69,7 +69,7 @@
         <!-- Submit Button -->
         <button type="submit"
             class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700
-                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 ease-in-out">
+                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 ease-in-out">
             Kirim
         </button>
     </form>

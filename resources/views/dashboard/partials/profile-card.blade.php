@@ -4,7 +4,7 @@
         <div class="relative mb-2">
             <div class="w-28 h-28 rounded-full bg-white p-1 shadow-xl">
                 <div class="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
-                    <img src="{{ asset('images/RSDB.png') }}" alt="Profile" class="w-26 h-26 object-contain">
+                    <img src="{{ asset('images/logoRSDB.png') }}" alt="Profile" class="w-26 h-26 object-contain">
                 </div>
             </div>
         </div>

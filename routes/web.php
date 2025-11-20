@@ -23,7 +23,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', PreventBackHistory::class])
     ->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role:super-admin', PreventBackHistory::class])->group(function () {
+    Route::resource('users', UserManagementController::class);
+    Route::get('/client-role/{user}/edit', [ClientRoleController::class, 'edit'])->name('client-role.edit');
+    Route::post('/client-role/{user}', [ClientRoleController::class, 'store'])->name('client-role.store');
+});
+
+Route::middleware(['auth', 'role:super-admin', PreventBackHistory::class])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -68,16 +74,5 @@ Route::get('/logout', function () {
     $ok = collect($allowed)->contains(fn($base) => str_starts_with($redirect, $base));
     return redirect($ok ? $redirect : $fallback);
 })->name('sso.logout');
-
-Route::middleware(['auth', 'role:super-admin'])->group(function () {
-
-    // CRUD User
-    Route::resource('users', UserManagementController::class);
-
-    // Role per Client
-    Route::get('/client-role/{user}/edit', [ClientRoleController::class, 'edit'])->name('client-role.edit');
-    Route::post('/client-role/{user}', [ClientRoleController::class, 'store'])->name('client-role.store');
-});
-
 
 require __DIR__ . '/auth.php';
