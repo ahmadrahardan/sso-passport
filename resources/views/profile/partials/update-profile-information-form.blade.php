@@ -1,12 +1,14 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+        <h2 class="text-lg font-medium text-gray-900 text-center">
+            Ubah Profil
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
+        {{-- <p class="mt-1 text-xs text-gray-600 text-center">
+            Anda dapat mengubah username dan email anda
+        </p> --}}
+
+        <hr class="my-3 border-t border-2 border-slate-900">
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">

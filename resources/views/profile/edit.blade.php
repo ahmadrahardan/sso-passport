@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-5">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+    <div class="py-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-5">
             <!-- Profile Information Card -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="grid sm:grid-2 gap-6">

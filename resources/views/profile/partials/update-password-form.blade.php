@@ -1,12 +1,14 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Update Password') }}
+        <h2 class="text-lg font-medium text-gray-900 text-center">
+            Ubah Password
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
+        {{-- <p class="mt-1 text-xs text-gray-600 text-center">
+            Anda dapat mengubah dan mengonfirmasi perubahan password anda
+        </p> --}}
+
+        <hr class="my-3 border-t border-2 border-slate-900">
     </header>
 
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
