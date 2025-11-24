@@ -57,10 +57,11 @@
             </h1>
         </div>
 
-        <div class="px-6 py-2 bg-gray-100 rounded-b-xl">
+        <div class="px-6 py-2 bg-gray-100 rounded-b-xl relative">
 
             <form action="{{ route('users.update', $user) }}" method="POST" class="space-y-8">
                 @csrf
+                @method('PUT')
 
                 <!-- GRID 2 KOLOM -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-7">

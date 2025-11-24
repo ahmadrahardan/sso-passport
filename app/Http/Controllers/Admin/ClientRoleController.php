@@ -44,6 +44,6 @@ class ClientRoleController extends Controller
             $user->syncRoles([$role->name]);
         }
 
-        return back()->with('success', 'Role berhasil diatur untuk client ini.');
+        return redirect()->route('users.index')->with('success', 'Role berhasil diatur untuk client ini.');
     }
 }

@@ -4,7 +4,7 @@
         EDIT PROFIL
     </div>
 
-    <section class="px-6 py-1 bg-gray-100 rounded-b-xl">
+    <section class="px-6 py-1 bg-gray-100 rounded-b-xl relative">
 
         <form method="post" action="{{ route('profile.update') }}" class="space-y-8">
             @csrf

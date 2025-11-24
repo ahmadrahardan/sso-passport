@@ -1,5 +1,14 @@
 <x-admin-layout title="Kelola Akun">
 
+    @if (session('success'))
+        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+            class="absolute top-24 right-6 bg-emerald-500 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 z-50">
+
+            <span class="font-medium">{{ session('success') }}</span>
+
+        </div>
+    @endif
+
     <div class="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow-md h-[530px]">
 
         {{-- Header --}}
@@ -77,18 +86,18 @@
 
 
 
+            </div>
+
+            {{-- Floating Add Button --}}
+            <a href="{{ route('users.create') }}"
+                class="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg"><svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                    <path
+                        d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z">
+                    </path>
+                </svg>
+            </a>
+
         </div>
-
-        {{-- Floating Add Button --}}
-        <a href="{{ route('users.create') }}"
-            class="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg"><svg
-                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
-                <path
-                    d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z">
-                </path>
-            </svg>
-        </a>
-
-    </div>
 
 </x-admin-layout>
