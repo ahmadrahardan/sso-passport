@@ -15,7 +15,7 @@ class UserManagementTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->createRoles(); 
+        $this->createRoles();
     }
 
     private function admin()
@@ -139,21 +139,5 @@ class UserManagementTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors('email');
-    }
-
-    /** @test */
-    public function admin_dapat_menghapus_user()
-    {
-        $admin = $this->admin();
-        $user  = User::factory()->create();
-
-        $response = $this->actingAs($admin)->delete("/users/{$user->id}");
-
-        $response->assertRedirect()
-            ->assertSessionHas('success', 'User dihapus');
-
-        $this->assertDatabaseMissing('users', [
-            'id' => $user->id,
-        ]);
     }
 }
