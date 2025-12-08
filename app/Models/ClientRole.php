@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 
 class ClientRole extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['user_id', 'client_id', 'role_id'];
 
     public function user()

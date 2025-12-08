@@ -4,96 +4,86 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
+use Tests\CreatesRoles;
 
 class ProfileTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CreatesRoles;
 
-    public function test_profile_page_is_displayed(): void
+    protected function setUp(): void
     {
-        $user = User::factory()->create();
-
-        $response = $this
-            ->actingAs($user)
-            ->get('/profile');
-
-        $response->assertOk();
+        parent::setUp();
+        $this->createRoles();
     }
 
-    public function test_profile_information_can_be_updated(): void
+    /** @test */
+    public function dapat_membuka_halaman_edit_profile()
     {
         $user = User::factory()->create();
+        $user->assignRole('super-admin');
 
-        $response = $this
-            ->actingAs($user)
-            ->patch('/profile', [
-                'name' => 'Test User',
-                'email' => 'test@example.com',
-            ]);
+        $response = $this->actingAs($user)->get('/profile');
 
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
-
-        $user->refresh();
-
-        $this->assertSame('Test User', $user->name);
-        $this->assertSame('test@example.com', $user->email);
-        $this->assertNull($user->email_verified_at);
+        $response->assertStatus(200)
+            ->assertViewIs('profile.edit')
+            ->assertViewHas('user');
     }
 
-    public function test_email_verification_status_is_unchanged_when_the_email_address_is_unchanged(): void
+    /** @test */
+    public function dapat_update_profile_tanpa_password()
     {
         $user = User::factory()->create();
+        $user->assignRole('super-admin');
 
-        $response = $this
-            ->actingAs($user)
-            ->patch('/profile', [
-                'name' => 'Test User',
-                'email' => $user->email,
-            ]);
+        $response = $this->actingAs($user)->patch('/profile', [
+            'name'  => 'Nama Baru',
+            'email' => 'newemail@example.com',
+        ]);
 
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/profile');
+        $response->assertRedirect('/profile')
+            ->assertSessionHas('status', 'profile-updated');
 
-        $this->assertNotNull($user->refresh()->email_verified_at);
+        $this->assertDatabaseHas('users', [
+            'id'    => $user->id,
+            'name'  => 'Nama Baru',
+            'email' => 'newemail@example.com',
+        ]);
     }
 
-    public function test_user_can_delete_their_account(): void
+    /** @test */
+    public function dapat_update_password()
     {
         $user = User::factory()->create();
+        $user->assignRole('super-admin');
 
-        $response = $this
-            ->actingAs($user)
-            ->delete('/profile', [
-                'password' => 'password',
-            ]);
+        $response = $this->actingAs($user)->patch('/profile', [
+            'name'                  => 'User',
+            'email'                 => $user->email,
+            'password'              => 'password_baru',
+            'password_confirmation' => 'password_baru',
+        ]);
 
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect('/');
+        $response->assertRedirect('/profile')
+            ->assertSessionHas('status', 'profile-updated');
 
-        $this->assertGuest();
-        $this->assertNull($user->fresh());
+        $this->assertTrue(Hash::check('password_baru', $user->fresh()->password));
     }
 
-    public function test_correct_password_must_be_provided_to_delete_account(): void
+    /** @test */
+    public function gagal_update_password_jika_konfirmasi_salah()
     {
         $user = User::factory()->create();
+        $user->assignRole('super-admin');
 
-        $response = $this
-            ->actingAs($user)
-            ->from('/profile')
-            ->delete('/profile', [
-                'password' => 'wrong-password',
-            ]);
+        $response = $this->actingAs($user)->patch('/profile', [
+            'name'                  => $user->name,
+            'email'                 => $user->email,
+            'password'              => 'password_baru',
+            'password_confirmation' => 'salah',
+        ]);
 
-        $response
-            ->assertSessionHasErrorsIn('userDeletion', 'password')
-            ->assertRedirect('/profile');
-
-        $this->assertNotNull($user->fresh());
+        $response->assertSessionHasErrors('password');
     }
 }
