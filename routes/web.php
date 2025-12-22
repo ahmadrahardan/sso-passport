@@ -69,6 +69,7 @@ Route::get('/logout', function () {
     $allowed = [
         'http://localhost:8000',
         'http://localhost:8080',
+        'http://localhost:5173',
         // domain produksi
     ];
     $ok = collect($allowed)->contains(fn($base) => str_starts_with($redirect, $base));

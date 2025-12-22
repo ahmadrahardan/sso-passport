@@ -7,7 +7,7 @@ return [
         // 'url'  => 'http://localhost:8001/api/v1/sso/redirect',
         // 'url'  => 'http://localhost:8080',
         // 'url' => 'http://localhost:8001',
-        'url' => 'http://localhost:5173',
+        'url' => 'http://localhost:8001/api/sso/login',
         'icon' => '/images/apps/inventory.svg',
         // 'roles'=> ['admin','staff'],
     ],
