@@ -56,21 +56,23 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $credentials = [
-            'name' => $this->input('username'),
-            'password' => $this->input('password'),
-        ];
-
-        if (! Auth::attempt($credentials, $this->boolean('remember'))) {
+        if (! Auth::guard('web')->attempt(
+            [
+                'name' => $this->username,  
+                'password' => $this->password,
+            ],
+            $this->boolean('remember')
+        )) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'username' => 'Username atau password salah.',
+                'username' => trans('auth.failed'),
             ]);
         }
 
         RateLimiter::clear($this->throttleKey());
     }
+
 
 
     /**

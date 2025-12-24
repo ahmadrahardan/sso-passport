@@ -4,12 +4,8 @@ return [
         'key'  => 'inventory',
         'name' => 'SIMBA',
         'desc' => 'Sistem Informasi Manajemen Inventory',
-        // 'url'  => 'http://localhost:8001/api/v1/sso/redirect',
-        // 'url'  => 'http://localhost:8080',
-        // 'url' => 'http://localhost:8001',
         'url' => 'http://localhost:8001/api/sso/login',
         'icon' => '/images/apps/inventory.svg',
-        // 'roles'=> ['admin','staff'],
     ],
     // [
     //     'key'  => 'edu',
