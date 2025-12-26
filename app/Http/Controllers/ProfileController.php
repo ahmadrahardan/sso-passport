@@ -31,26 +31,38 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        $user->fill($request->validated());
-
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
-        }
+        $user->name = $request->name;
 
         if ($request->filled('password')) {
+            $request->validate(
+                [
+                    'password' => [
+                        'required',
+                        'confirmed',
+                        Password::min(8)
+                            ->letters()
+                            ->numbers()
+                            ->symbols(),
+                    ],
+                ],
+                [
+                    'password.required' => 'Password wajib diisi.',
+                    'password.min' => 'Password minimal 8 karakter.',
+                    'password.letters' => 'Password harus mengandung huruf.',
+                    'password.numbers' => 'Password harus mengandung angka.',
+                    'password.symbols' => 'Password harus mengandung simbol.',
+                    'password.confirmed' => 'Konfirmasi password tidak cocok.',
+                ]
+            );
 
-            $request->validate([
-                'password' => ['required', 'confirmed', Password::defaults()],
-            ]);
-
-            $user->password = bcrypt($request->password);
+            $user->password = Hash::make($request->password);
         }
 
         $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')
+            ->with('success', 'Anda berhasil mengedit profil');
     }
-
 
     /**
      * Delete the user's account.
