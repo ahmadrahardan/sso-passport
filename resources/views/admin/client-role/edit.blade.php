@@ -1,5 +1,7 @@
 <x-admin-layout title="Edit User">
 
+    <x-notification-success />
+
     <div class="max-w-7xl mx-auto">
 
         {{-- Header --}}

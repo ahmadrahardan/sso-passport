@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
     {
         $super = User::updateOrCreate(
             ['email' => 'bluepylox@gmail.com'],
-            ['name' => 'Rahardan', 'password' => Hash::make('password')]
+            ['name' => 'Rayyaa', 'password' => Hash::make('password')]
         );
-        $super->syncRoles(['super-admin']); // ⬅️ jadi super admin
+        $super->syncRoles(['super-admin']);
 
         $ppk = User::updateOrCreate(
             ['email' => 'timppk@gmail.com'],

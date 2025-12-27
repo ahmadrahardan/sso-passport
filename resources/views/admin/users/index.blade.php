@@ -1,103 +1,129 @@
 <x-admin-layout title="Kelola Akun">
 
-    @if (session('success'))
-        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
-            class="absolute top-24 right-6 bg-emerald-500 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 z-50">
+    <x-notification-success />
 
-            <span class="font-medium">{{ session('success') }}</span>
+    <div class="max-w-7xl mx-auto">
 
+        <div class="rounded-lg p-2 mb-2">
+            <div class="flex items-center justify-between gap-4">
+                {{-- Search Bar --}}
+                <div class="flex-1 max-w-md">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                            </svg>
+                        </div>
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Cari Akun..."
+                            class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+
+                        <div id="searchLoading" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center">
+                            <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Add Button --}}
+                <a href="{{ route('users.create') }}"
+                    class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                        <path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path>
+                    </svg>
+                    Tambah Akun
+                </a>
+            </div>
         </div>
-    @endif
 
-    <div class="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow-md h-[530px]">
+        {{-- Table Card --}}
+        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
 
-        {{-- Header --}}
-        <div class="text-center">
-            <h2 class="text-xl font-bold text-blue-900 border-b-2 inline-block pb-1">
-                Daftar Data Akun Pengguna
-            </h2>
-        </div>
-
-        {{-- Card Container --}}
-        <div class="p-6">
-            <div class="max-h-[415px] overflow-y-auto">
-                {{-- Table --}}
-                <table class="w-full text-sm">
-                    <thead class="sticky top-0 bg-white z-10">
-                        <tr class="text-gray-600 border-b">
-                            <th class="py-3">Username</th>
-                            <th class="py-3">Email</th>
-                            <th class="py-3">Tanggal dibuat</th>
-                            <th class="py-3">Aksi</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach ($users as $user)
-                            <tr class="border-b hover:bg-gray-200 transition bg-white">
-
-                                {{-- Username --}}
-                                <td class="py-3 text-center">
-                                    {{ $user->name }}
-                                </td>
-
-                                {{-- Email --}}
-                                <td class="py-3 text-center">
-                                    {{ $user->email }}
-                                </td>
-
-                                {{-- Tanggal --}}
-                                <td class="py-3 text-center">
-                                    {{ $user->created_at->format('d F Y') }}
-                                </td>
-
-                                {{-- Aksi --}}
-                                <td class="py-3 text-center flex gap-2 justify-center">
-
-                                    {{-- Edit --}}
-                                    <a href="{{ route('users.edit', $user) }}"
-                                        class="inline-flex items-center gap-1 bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-gray-300">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                            class="w-4 h-4">
-                                            <path
-                                                d="M9.24264 18.9967H21V20.9967H3V16.754L12.8995 6.85453L17.1421 11.0972L9.24264 18.9967ZM14.3137 5.44032L16.435 3.319C16.8256 2.92848 17.4587 2.92848 17.8492 3.319L20.6777 6.14743C21.0682 6.53795 21.0682 7.17112 20.6777 7.56164L18.5563 9.68296L14.3137 5.44032Z">
-                                            </path>
-                                        </svg>
-                                        Edit
-                                    </a>
-
-                                    {{-- Role per Client --}}
-                                    <a href="{{ route('client-role.edit', $user) }}"
-                                        class="inline-flex items-center gap-1 bg-blue-400 text-white px-3 py-1 rounded-lg hover:bg-blue-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                            class="w-4 h-4">
-                                            <path
-                                                d="M14 21L12 23L10 21H4.99509C3.89323 21 3 20.1074 3 19.0049V4.99509C3 3.89323 3.89262 3 4.99509 3H19.0049C20.1068 3 21 3.89262 21 4.99509V19.0049C21 20.1068 20.1074 21 19.0049 21H14ZM19 19V5H5V19H10.8284L12 20.1716L13.1716 19H19ZM7.97216 18.1808C7.35347 17.9129 6.76719 17.5843 6.22083 17.2024C7.46773 15.2753 9.63602 14 12.1022 14C14.5015 14 16.6189 15.2071 17.8801 17.0472C17.3438 17.4436 16.7664 17.7877 16.1555 18.0718C15.2472 16.8166 13.77 16 12.1022 16C10.3865 16 8.87271 16.8641 7.97216 18.1808ZM12 13C10.067 13 8.5 11.433 8.5 9.5C8.5 7.567 10.067 6 12 6C13.933 6 15.5 7.567 15.5 9.5C15.5 11.433 13.933 13 12 13ZM12 11C12.8284 11 13.5 10.3284 13.5 9.5C13.5 8.67157 12.8284 8 12 8C11.1716 8 10.5 8.67157 10.5 9.5C10.5 10.3284 11.1716 11 12 11Z">
-                                            </path>
-                                        </svg>
-                                        Role Client
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-
-
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-lg font-bold text-blue-900">
+                    Daftar Akun Pengguna
+                </h2>
             </div>
 
-            {{-- Floating Add Button --}}
-            <a href="{{ route('users.create') }}"
-                class="fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg"><svg
-                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
-                    <path
-                        d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z">
-                    </path>
-                </svg>
-            </a>
+            <div id="tableContainer">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50 border-b border-gray-200">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    USERNAME
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    EMAIL
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    TANGGAL DIBUAT
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    AKSI
+                                </th>
+                            </tr>
+                        </thead>
 
+                        <tbody id="userTableBody" class="bg-white divide-y divide-gray-200">
+                            @include('admin.users.partials.table-rows', ['users' => $users])
+                        </tbody>
+
+                    </table>
+                </div>
+
+                {{-- Footer/Pagination --}}
+                @if($users->count() > 0)
+                    <div class="px-6 py-4 border-t border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-700">
+                                @php
+                                    $firstItem = ($users->currentPage() - 1) * $users->perPage() + 1;
+                                    $lastItem = min($users->currentPage() * $users->perPage(), $users->total());
+                                @endphp
+                                Menampilkan {{ $firstItem }} sampai {{ $lastItem }} dari {{ $users->total() }} hasil
+                            </div>
+
+                            @if($users->hasPages())
+                                <div class="flex items-center gap-3">
+                                    {{-- Previous Button --}}
+                                    @if($users->onFirstPage())
+                                        <span class="border border-gray-200 px-3 py-2 text-sm text-gray-400 rounded-lg cursor-not-allowed">
+                                            &lt; Sebelumnya
+                                        </span>
+                                    @else
+                                        <a href="{{ $users->previousPageUrl() }}"
+                                        class="border border-gray-200 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">
+                                            &lt; Sebelumnya
+                                        </a>
+                                    @endif
+
+                                    {{-- Next Button --}}
+                                    @if($users->hasMorePages())
+                                        <a href="{{ $users->nextPageUrl() }}"
+                                        class="border border-gray-200 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">
+                                            Selanjutnya &gt;
+                                        </a>
+                                    @else
+                                        <span class="border border-gray-200 px-3 py-2 text-sm text-gray-400 rounded-lg cursor-not-allowed">
+                                            Selanjutnya &gt;
+                                        </span>
+                                    @endif
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+            </div>
         </div>
+    </div>
+
+<script>
+    window.USERS_INDEX_URL = "{{ route('users.index') }}";
+</script>
 
 </x-admin-layout>
