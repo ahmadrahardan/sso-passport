@@ -53,34 +53,94 @@
                 </div>
             </div>
 
-            <form action="{{ route('users.store') }}" method="POST" class="space-y-8">
-                @csrf
+            <div id="form-container">
+                <form action="{{ route('users.store') }}" method="POST" id="createUserForm" class="space-y-8" onsubmit="return validateCreateForm()">
+                    @csrf
 
-                <div class="flex items-center gap-3 mb-6">
-                    <div>
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="40" height="40" rx="8" fill="#CED8F7"/>
-                            <rect x="8" y="8" width="24" height="24" rx="12" fill="#006FFF"/>
-                            <path d="M20 20C22.21 20 24 18.21 24 16C24 13.79 22.21 12 20 12C17.79 12 16 13.79 16 16C16 18.21 17.79 20 20 20ZM20 22C17.33 22 12 23.34 12 26V28H28V26C28 23.34 22.67 22 20 22Z" fill="white"/>
-                        </svg>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div>
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="40" height="40" rx="8" fill="#CED8F7"/>
+                                <rect x="8" y="8" width="24" height="24" rx="12" fill="#006FFF"/>
+                                <path d="M20 20C22.21 20 24 18.21 24 16C24 13.79 22.21 12 20 12C17.79 12 16 13.79 16 16C16 18.21 17.79 20 20 20ZM20 22C17.33 22 12 23.34 12 26V28H28V26C28 23.34 22.67 22 20 22Z" fill="white"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-bold text-gray-900">Informasi Akun</h2>
                     </div>
-                    <h2 class="text-xl font-bold text-gray-900">Informasi Akun</h2>
-                </div>
 
-                {{-- Form --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {{-- Username --}}
+                    {{-- Form --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {{-- Username --}}
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">
+                                <span class="text-red-500">*</span> Username
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Masukkan username"
+                                value="{{ old('name') }}"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('name') border-red-500 @enderror">
+                            @error('name')
+                                <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                                        <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z"></path>
+                                    </svg>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        {{-- Email --}}
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">
+                                <span class="text-red-500">*</span> Email
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Masukkan email"
+                                value="{{ old('email') }}"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('email') border-red-500 @enderror">
+                            @error('email')
+                                <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                                        <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z"></path>
+                                    </svg>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- Password Field --}}
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">
-                            <span class="text-red-500">*</span> Username
+                            <span class="text-red-500">*</span> Password
                         </label>
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Masukkan username"
-                            value="{{ old('name') }}"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('name') border-red-500 @enderror">
-                        @error('name')
+                        <div class="relative w-full md:w-1/2">
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder="Masukkan password"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('password') border-red-500 @enderror">
+                            <button
+                                type="button"
+                                onclick="togglePassword()"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                                <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L6.59 6.59m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                                </svg>
+                            </button>
+                        </div>
+                        @error('password')
                             <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
                                     <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z"></path>
@@ -90,80 +150,24 @@
                         @enderror
                     </div>
 
-                    {{-- Email --}}
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">
-                            <span class="text-red-500">*</span> Email
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Masukkan email"
-                            value="{{ old('email') }}"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('email') border-red-500 @enderror">
-                        @error('email')
-                            <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z"></path>
-                                </svg>
-                                {{ $message }}
+                    {{-- Footer Section --}}
+                    <div class="flex items-center justify-between pt-6 border-t border-gray-200">
+                        <div>
+                            <p class="text-sm text-gray-600">
+                                <span class="text-red-500 font-semibold">*</span> Menandakan field wajib diisi
                             </p>
-                        @enderror
-                    </div>
-                </div>
+                        </div>
 
-                {{-- Password Field --}}
-                <div>
-                    <label class="block text-gray-700 font-medium mb-2">
-                        <span class="text-red-500">*</span> Password
-                    </label>
-                    <div class="relative w-full md:w-1/2">
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            placeholder="Masukkan password"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('password') border-red-500 @enderror">
-                        <button
-                            type="button"
-                            onclick="togglePassword()"
-                            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
-                            <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                            <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L6.59 6.59m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                            </svg>
-                        </button>
+                        <div>
+                            <button
+                                type="submit"
+                                class="bg-green-500 hover:bg-green-600 text-white px-12 py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-200">
+                                Selesai
+                            </button>
+                        </div>
                     </div>
-                    @error('password')
-                        <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                                <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z"></path>
-                            </svg>
-                            {{ $message }}
-                        </p>
-                    @enderror
-                </div>
-
-                {{-- Footer Section --}}
-                <div class="flex items-center justify-between pt-6 border-t border-gray-200">
-                    <div>
-                        <p class="text-sm text-gray-600">
-                            <span class="text-red-500 font-semibold">*</span> Menandakan field wajib diisi
-                        </p>
-                    </div>
-
-                    <div>
-                        <button
-                            type="submit"
-                            class="bg-green-500 hover:bg-green-600 text-white px-12 py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-200">
-                            Selesai
-                        </button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
 
         </div>
     </div>

@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <!-- Alert -->
+    <!-- Alert Login Gagal -->
     @if ($errors->any() || session('error'))
         <div x-data="{ show: true }"
             x-show="show"
@@ -29,7 +29,7 @@
     @endif
 
     <!-- Form -->
-    <form action="{{ route('login') }}" method="POST" id="loginForm" class="space-y-6">
+    <form action="{{ route('login') }}" method="POST" id="loginForm" class="space-y-6" onsubmit="return validateForm()">
         @csrf
 
         <!-- Username Input -->
@@ -52,7 +52,6 @@
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out pr-12"
                     required>
             </div>
-
         </div>
         <!-- Forgot Password -->
         <div class="text-right">
@@ -63,7 +62,7 @@
         </div>
 
         <!-- Submit Button -->
-        <x-primary-button>
+        <x-primary-button onclick="return validateForm()">
             {{ __('Login') }}
         </x-primary-button>
     </form>
