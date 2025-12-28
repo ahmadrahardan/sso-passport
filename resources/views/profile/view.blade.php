@@ -23,7 +23,7 @@
 
                         <div>
                             <h1 class="text-white text-3xl font-bold">{{ $user->name }}</h1>
-                            <p class="text-blue-100 text-base mt-1">Administrator Sistem RSUD Balung</p>
+                            <p class="text-blue-100 text-base mt-1">Administrator Sistem RSD Balung</p>
                         </div>
                     </div>
 

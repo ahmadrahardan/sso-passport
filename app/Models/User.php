@@ -92,7 +92,7 @@ class User extends Authenticatable
             ->line('Jika tombol di atas tidak berfungsi, Anda bisa salin dan tempel URL di bawah ini ke browser Anda:')
             ->line(new HtmlString('<a href="' . $url . '" style="color: #3490dc; text-decoration: underline; word-break: break-all;">' . $url . '</a>'))
             ->line('Jika Anda tidak merasa melakukan permintaan ini, abaikan saja email ini.')
-            ->salutation(new HtmlString('Hormat kami,<br>Tim RSUD Balung'));
+            ->salutation(new HtmlString('Hormat kami,<br>Tim RSD Balung'));
 
         $this->notify(new class($mailMessage) extends \Illuminate\Notifications\Notification {
             public $mailMessage;
