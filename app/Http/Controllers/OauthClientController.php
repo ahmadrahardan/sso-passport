@@ -77,7 +77,7 @@ class OauthClientController extends Controller
             'redirect_uris' => [$request->redirect],
         ])->save();
 
-        return redirect()->route('clients.index')->with('success', 'Client berhasil diupdate.');
+        return redirect()->route('clients.index')->with('success', 'Role User Berhasil Ditetapkan.');
     }
 
 

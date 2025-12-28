@@ -1,4 +1,3 @@
-{{-- resources/views/components/admin-layout.blade.php --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -13,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin.js'])
 </head>
 
 <body class="bg-gradient-to-t from-blue-100 to-indigo-50">
@@ -31,7 +30,7 @@
                 <x-admin-header></x-admin-header>
             </div>
 
-            <main class="flex-1 p-8">
+            <main class="flex-1 p-4">
                 {{ $slot }}
             </main>
         </div>

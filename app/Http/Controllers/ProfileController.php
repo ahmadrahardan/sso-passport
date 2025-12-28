@@ -19,7 +19,15 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        $mode = $request->query('mode', 'view');
+
+        if ($mode === 'edit') {
+            return view('profile.edit', [
+                'user' => $request->user(),
+            ]);
+        }
+
+        return view('profile.view', [
             'user' => $request->user(),
         ]);
     }

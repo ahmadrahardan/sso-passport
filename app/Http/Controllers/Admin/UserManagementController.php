@@ -10,10 +10,40 @@ use Illuminate\Validation\Rules\Password;
 
 class UserManagementController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+
+        $users = User::withoutRole('super-admin')
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('admin.users.partials.table-rows', [
+                    'users' => $users
+                ])->render(),
+
+                // Pagination metadata
+                'pagination' => [
+                    'current_page' => $users->currentPage(),
+                    'last_page'    => $users->lastPage(),
+                    'per_page'     => $users->perPage(),
+                    'total'        => $users->total(),
+                    'from'         => $users->firstItem(),
+                    'to'           => $users->lastItem(),
+                ]
+            ]);
+        }
+
         return view('admin.users.index', [
-            'users' => User::all()
+            'users' => $users
         ]);
     }
 
