@@ -59,7 +59,7 @@ class UserManagementController extends Controller
     {
         $request->validate(
             [
-                'name' => ['required', 'string', 'max:255'],
+                'name' => ['required', 'string', 'max:255', 'unique:users,name'],
                 'email' => ['required', 'email', 'unique:users,email'],
                 'password' => [
                     'required',
@@ -71,7 +71,8 @@ class UserManagementController extends Controller
                 ],
             ],
             [
-                'name.required' => 'Nama wajib diisi.',
+                'name.required' => 'Username wajib diisi.',
+                'name.unique'   => 'Username sudah digunakan.',
                 'email.required' => 'Email wajib diisi.',
                 'email.email' => 'Format email tidak valid.',
                 'email.unique' => 'Email sudah terdaftar.',
@@ -108,7 +109,7 @@ class UserManagementController extends Controller
     {
         $request->validate(
             [
-                'name' => ['required', 'string', 'max:255'],
+                'name' => ['required', 'string', 'max:255', 'unique:users,name,' . $user->id],
                 'email' => ['required', 'email', 'unique:users,email,' . $user->id],
                 'password' => [
                     'nullable',
@@ -120,7 +121,8 @@ class UserManagementController extends Controller
                 ],
             ],
             [
-                'name.required' => 'Nama wajib diisi.',
+                'name.required' => 'Username wajib diisi.',
+                'name.unique'   => 'Username sudah digunakan.',
                 'email.required' => 'Email wajib diisi.',
                 'email.email' => 'Format email tidak valid.',
                 'email.unique' => 'Email sudah digunakan user lain.',
