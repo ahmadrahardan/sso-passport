@@ -1,7 +1,7 @@
 @component('mail::layout')
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            RSUD Balung
+            RSD Balung
         @endcomponent
     @endslot
 
@@ -9,7 +9,7 @@
 
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} RSUD Balung. Hak Cipta Dilindungi Undang-Undang.
+            © {{ date('Y') }} RSD Balung. Hak Cipta Dilindungi Undang-Undang.
         @endcomponent
     @endslot
 @endcomponent
