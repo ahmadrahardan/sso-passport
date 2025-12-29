@@ -120,30 +120,66 @@
                         <label class="block text-gray-700 font-medium mb-2">
                             <span class="text-red-500">*</span> Password
                         </label>
+
                         <div class="relative w-full md:w-1/2">
                             <input
                                 type="password"
-                                name="password"
                                 id="password"
+                                name="password"
                                 placeholder="Masukkan password"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('password') border-red-500 @enderror">
+                                class="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg
+                                    focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                    transition-all @error('password') border-red-500 @enderror">
+
                             <button
                                 type="button"
-                                onclick="togglePassword()"
+                                onclick="togglePassword('password', 'eye-icon-password', 'eye-off-icon-password')"
                                 class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
-                                <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                <svg id="eye-icon-password" xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5
+                                        c4.478 0 8.268 2.943 9.542 7
+                                        -1.274 4.057-5.064 7-9.542 7
+                                        -4.477 0-8.268-2.943-9.542-7z" />
                                 </svg>
-                                <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L6.59 6.59m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+
+                                <svg id="eye-off-icon-password" xmlns="http://www.w3.org/2000/svg"
+                                    class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13.875 18.825A10.05 10.05 0 0112 19
+                                        c-4.478 0-8.268-2.943-9.543-7
+                                        a9.97 9.97 0 011.563-3.029
+                                        m5.858.908a3 3 0 114.243 4.243
+                                        M9.878 9.878l4.242 4.242
+                                        M9.878 9.878L6.59 6.59
+                                        m7.532 7.532l3.29 3.29
+                                        M3 3l3.59 3.59
+                                        m0 0A9.953 9.953 0 0112 5
+                                        c4.478 0 8.268 2.943 9.543 7
+                                        a10.025 10.025 0 01-4.132 5.411
+                                        m0 0L21 21" />
                                 </svg>
                             </button>
                         </div>
+
                         @error('password')
                             <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-                                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z"></path>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    class="w-4 h-4">
+                                    <path
+                                        d="M12 22C6.47715 22 2 17.5228 2 12
+                                        C2 6.47715 6.47715 2 12 2
+                                        C17.5228 2 22 6.47715 22 12
+                                        C22 17.5228 17.5228 22 12 22
+                                        ZM11 15V17H13V15H11ZM11 7V13H13V7H11Z">
+                                    </path>
                                 </svg>
                                 {{ $message }}
                             </p>
