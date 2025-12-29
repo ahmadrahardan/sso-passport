@@ -63,7 +63,6 @@ class UserManagementController extends Controller
                 'email' => ['required', 'email', 'unique:users,email'],
                 'password' => [
                     'required',
-                    'confirmed',
                     Password::min(8)
                         ->letters()
                         ->numbers()
@@ -82,7 +81,6 @@ class UserManagementController extends Controller
                 'password.letters' => 'Password harus mengandung huruf.',
                 'password.numbers' => 'Password harus mengandung angka.',
                 'password.symbols' => 'Password harus mengandung simbol.',
-                'password.confirmed' => 'Konfirmasi password tidak cocok.',
             ]
         );
 
@@ -113,7 +111,6 @@ class UserManagementController extends Controller
                 'email' => ['required', 'email', 'unique:users,email,' . $user->id],
                 'password' => [
                     'nullable',
-                    'confirmed',
                     Password::min(8)
                         ->letters()
                         ->numbers()
@@ -131,7 +128,6 @@ class UserManagementController extends Controller
                 'password.letters' => 'Password harus mengandung huruf.',
                 'password.numbers' => 'Password harus mengandung angka.',
                 'password.symbols' => 'Password harus mengandung simbol.',
-                'password.confirmed' => 'Konfirmasi password tidak cocok.',
             ]
         );
 
