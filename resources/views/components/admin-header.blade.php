@@ -1,8 +1,7 @@
-<div class="w-full bg-white shadow-md border-b ">
-    <div class="flex items-center justify-between px-14 py-4">
-
+<div class="w-full bg-white shadow-md border-b">
+    <div class="flex items-center justify-between px-6 xl:px-14 py-4">
         <div>
-            <h1 class="text-2xl font-semibold text-gray-800">
+            <h1 class="text-xl xl:text-2xl font-semibold text-gray-800 truncate max-w-full">
                 @if(request()->routeIs('profile.edit') && request()->has('mode') && request('mode') === 'edit')
                     Edit Profil
                 @elseif(request()->routeIs('profile.edit'))

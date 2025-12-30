@@ -15,22 +15,22 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin.js'])
 </head>
 
-<body class="bg-gradient-to-t from-blue-100 to-indigo-50">
+<body class="bg-gradient-to-t from-blue-100 to-indigo-50 overflow-hidden h-screen">
 
-    <div class="flex min-h-screen">
+    <div class="flex h-full min-w-0 overflow-hidden">
 
         {{-- ============= SIDEBAR ============= --}}
-        <aside>
+        <aside class="flex-shrink-0 h-full">
             <x-admin-sidebar></x-admin-sidebar>
         </aside>
 
         {{-- ============= CONTENT ============= --}}
-        <div class="flex-1 flex flex-col">
-            <div class="sticky top-0 z-10 bg-white shadow-md">
+        <div class="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
+            <div class="sticky top-0 z-10 bg-white shadow-md flex-shrink-0">
                 <x-admin-header></x-admin-header>
             </div>
 
-            <main class="flex-1 p-4">
+            <main class="flex-1 p-4 overflow-y-auto overflow-x-hidden">
                 {{ $slot }}
             </main>
         </div>

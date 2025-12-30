@@ -2,12 +2,12 @@
 
     <x-notification-success />
 
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-7xl mx-auto min-w-0 h-full">
 
         <div class="rounded-lg p-2 mb-2">
-            <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center justify-between gap-4 flex-nowrap">
                 {{-- Search Bar --}}
-                <div class="flex-1 max-w-md">
+                <div class="flex-1 min-w-[240px] max-w-md">
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -31,7 +31,7 @@
 
                 {{-- Add Button --}}
                 <a href="{{ route('users.create') }}"
-                    class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
+                    class="inline-flex items-center gap-2 whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                         <path d="M11 11V7H13V11H17V13H13V17H11V13H7V11H11ZM12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"></path>
                     </svg>
@@ -41,7 +41,7 @@
         </div>
 
         {{-- Table Card --}}
-        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <div class="bg-white rounded-lg shadow-sm overflow-hidden min-w-0">
 
             <div class="px-6 py-4 border-b border-gray-200">
                 <h2 class="text-lg font-bold text-blue-900">
@@ -50,8 +50,8 @@
             </div>
 
             <div id="tableContainer">
-                <div class="overflow-x-auto">
-                    <table class="w-full">
+                <div class="overflow-x-auto max-w-full">
+                    <table class="w-full min-w-[720px] table-fixed">
                         <thead class="bg-gray-50 border-b border-gray-200">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">

@@ -1,5 +1,3 @@
-import './admin';
-
 window.togglePassword = function (
     inputId = 'password',
     eyeId = 'eye-icon',
@@ -22,14 +20,13 @@ window.togglePassword = function (
     }
 };
 
-
 window.validateCreateForm = function () {
     const name = document.getElementById('name')?.value.trim();
     const email = document.getElementById('email')?.value.trim();
     const password = document.getElementById('password')?.value.trim();
 
     if (!name || !email || !password) {
-        showFormAlert(
+        window.showFormAlert(
             'Masih terdapat data yang kosong, silahkan lengkapi',
             'warning'
         );
@@ -38,7 +35,7 @@ window.validateCreateForm = function () {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        showFormAlert(
+        window.showFormAlert(
             'Format email tidak valid, silahkan periksa kembali',
             'error'
         );
@@ -48,8 +45,7 @@ window.validateCreateForm = function () {
     return true;
 };
 
-
-function showFormAlert(message, type = 'warning') {
+window.showFormAlert = function (message, type = 'warning') {
     const existing = document.getElementById('form-alert');
     if (existing) existing.remove();
 
@@ -83,12 +79,28 @@ function showFormAlert(message, type = 'warning') {
 
     document.body.appendChild(alert);
 
-    // Re-init Alpine untuk elemen baru
     if (window.Alpine) {
         Alpine.initTree(alert);
     }
-}
+};
 
+window.validateEditUserRoleForm = function () {
+    const form = document.getElementById('editUserRoleForm');
+    if (!form) return true;
+
+    const clientId = form.querySelector('select[name="client_id"]')?.value;
+    const roleId = form.querySelector('select[name="role_id"]')?.value;
+
+    if (!clientId || !roleId) {
+        window.showFormAlert(
+            'Client / Role belum ditetapkan, silahkan dilengkapi',
+            'warning'
+        );
+        return false;
+    }
+
+    return true;
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
@@ -162,11 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/*
-|--------------------------------------------------------------------------
-| Edit User Role Validation
-|--------------------------------------------------------------------------
-*/
 window.validateEditUserRoleForm = function () {
     const form = document.getElementById('editUserRoleForm');
     if (!form) return true;

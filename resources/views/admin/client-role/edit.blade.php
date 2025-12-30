@@ -93,7 +93,6 @@
                         <select
                             name="client_id"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            required
                         >
                             <option value="">Pilih client</option>
                             @foreach ($clients as $client)
@@ -118,7 +117,6 @@
                         <select
                             name="role_id"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            required
                         >
                             <option value="">Pilih role</option>
                             @foreach ($roles as $role)
