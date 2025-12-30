@@ -1,6 +1,6 @@
 @forelse ($users as $user)
 <tr class="hover:bg-gray-50 transition-colors">
-    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+    <td class="px-6 py-4 text-sm text-gray-900 truncate max-w-[180px]">
         {{ $user->name }}
     </td>
     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
@@ -10,8 +10,7 @@
         {{ $user->created_at->format('d F Y') }}
     </td>
     <td class="px-6 py-4 whitespace-nowrap text-sm">
-        <div class="flex items-center gap-3">
-
+        <div class="flex items-center gap-3 whitespace-nowrap flex-shrink-0">
             <a href="{{ route('users.edit', $user) }}"
                class="flex items-center gap-1 hover:text-gray-500 text-sm font-medium">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">

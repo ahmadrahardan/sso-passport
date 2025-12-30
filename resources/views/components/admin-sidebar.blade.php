@@ -1,4 +1,4 @@
-<div class="w-64 bg-gradient-to-t from-blue-900 to-blue-600 text-white shadow-lg flex flex-col sticky top-0 h-screen">
+<div class="w-56 xl:w-64 flex-shrink-0 bg-gradient-to-t from-blue-900 to-blue-600 text-white shadow-lg flex flex-col h-full">
 
     <div class="border-b border-white h-20 flex items-center justify-center">
         <img src="{{ asset('images/logowhite.png') }}" alt="Logo RSDB" class="h-[65px] w-auto object-contain">
