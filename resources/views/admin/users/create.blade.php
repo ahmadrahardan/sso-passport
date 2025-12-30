@@ -80,7 +80,6 @@
                                 id="name"
                                 name="name"
                                 placeholder="Masukkan username"
-                                value="{{ old('name') }}"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('name') border-red-500 @enderror">
                             @error('name')
                                 <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
@@ -102,7 +101,6 @@
                                 id="email"
                                 name="email"
                                 placeholder="Masukkan email"
-                                value="{{ old('email') }}"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all @error('email') border-red-500 @enderror">
                             @error('email')
                                 <p class="text-red-600 text-sm mt-2 flex items-center gap-1">
