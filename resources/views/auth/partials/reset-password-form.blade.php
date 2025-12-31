@@ -19,10 +19,10 @@
         <!-- Password Reset Token -->
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <!-- Email Input -->
         <div class="space-y-4">
 
             <!-- Email -->
+            <input type="hidden" name="email" value="{{ $request->email }}">
             {{-- <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                     Email
