@@ -1,61 +1,315 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SSO RSD Balung (Single Sign-On System)
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <strong>Sistem Single Sign-On untuk RSD Balung</strong><br>
+  Dikembangkan oleh Fasilkom UNEJ
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Daftar Isi
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Tentang Proyek](#tentang-proyek)
+- [Fitur Utama](#fitur-utama)
+- [Teknologi yang Digunakan](#teknologi-yang-digunakan)
+- [Persyaratan Sistem](#persyaratan-sistem)
+- [Instalasi](#instalasi)
+- [Konfigurasi](#konfigurasi)
+- [Penggunaan](#penggunaan)
+- [Struktur Proyek](#struktur-proyek)
+- [Dokumentasi API](#dokumentasi-api)
+- [Tim Pengembang](#tim-pengembang)
+- [Lisensi](#lisensi)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🏥 Tentang Proyek
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**SSO RSD Balung** adalah sistem otentikasi terpusat (Single Sign-On) yang dirancang khusus untuk Rumah Sakit Daerah (RSD) Balung. Sistem ini memungkinkan pengguna dari berbagai departemen dan aplikasi di RSD Balung untuk melakukan login sekali dan mengakses semua sistem terintegrasi tanpa perlu login ulang.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Sistem ini dibangun menggunakan **Laravel Framework** dengan **Laravel Passport** sebagai implementasi OAuth 2.0 untuk keamanan autentikasi tingkat enterprise.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Tujuan Proyek
 
-## Laravel Sponsors
+- Memberikan solusi otentikasi terpusat yang aman dan efisien
+- Menyederhanakan manajemen pengguna dan akses di berbagai aplikasi
+- Meningkatkan keamanan dan kontrol akses
+- Mengurangi beban pengguna dalam manajemen password
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## ✨ Fitur Utama
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **Single Sign-On (SSO)**: Login sekali untuk mengakses semua aplikasi terintegrasi
+- **OAuth 2.0 Implementation**: Menggunakan Laravel Passport untuk keamanan standar industri
+- **Role-Based Access Control (RBAC)**: Manajemen peran dan izin yang fleksibel
+- **User Management**: Manajemen pengguna terpusat dengan interface yang user-friendly
+- **API Authentication**: Token-based authentication untuk integrasi aplikasi pihak ketiga
+- **Audit Logging**: Pencatatan aktivitas untuk keperluan keamanan dan compliance
+- **Multi-Application Support**: Dukungan untuk multiple client applications
+- **Refresh Token Management**: Pembaruan token yang aman dan terkontrol
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠 Teknologi yang Digunakan
 
-## Code of Conduct
+| Komponen             | Versi  | Deskripsi                       |
+| -------------------- | ------ | ------------------------------- |
+| **PHP**              | 8.2+   | Bahasa pemrograman backend      |
+| **Laravel**          | 11.x   | Web application framework       |
+| **Laravel Passport** | Latest | OAuth 2.0 server implementation |
+| **MySQL/MariaDB**    | Latest | Database management system      |
+| **Node.js**          | Latest | Build tools & asset compilation |
+| **Vite**             | Latest | Frontend build tool             |
+| **Tailwind CSS**     | Latest | CSS framework                   |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 📦 Persyaratan Sistem
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Minimum Requirements
 
-## License
+- **PHP**: 8.2 atau lebih tinggi
+- **Composer**: 2.0 atau lebih tinggi
+- **Node.js**: 18.0 atau lebih tinggi (untuk development)
+- **Database**: MySQL 5.7+ atau MariaDB 10.2+
+- **Web Server**: Apache, Nginx, atau built-in PHP server
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Recommended Setup
+
+- **PHP**: 8.3+
+- **MySQL**: 8.0+
+- **Node.js**: 20 LTS
+- **Nginx**: Latest stable version
+
+---
+
+## 🚀 Instalasi
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/ahmadrahardan/sso-passport.git
+cd sso-passport
+```
+
+### 2. Install Dependencies
+
+#### Install PHP Dependencies
+
+```bash
+composer install
+```
+
+#### Install Node Dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Environment
+
+Copy file `.env.example` menjadi `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Edit file `.env` dan sesuaikan konfigurasi database dan aplikasi Anda:
+
+```env
+APP_NAME="SSO RSD Balung"
+APP_ENV=production
+APP_KEY=
+APP_DEBUG=false
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sso_rsd_balung
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 4. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 5. Setup Database
+
+#### Create Database
+
+```bash
+mysql -u root -p -e "CREATE DATABASE sso_rsd_balung CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+```
+
+#### Run Migrations
+
+```bash
+php artisan migrate
+```
+
+#### Seed Database (Optional)
+
+```bash
+php artisan db:seed
+```
+
+### 6. Generate Passport Keys
+
+```bash
+php artisan passport:install
+```
+
+### 7. Build Assets
+
+```bash
+npm run build
+```
+
+### 8. Verify Installation
+
+```bash
+php artisan serve
+```
+
+Akses aplikasi di `http://localhost:8000`
+
+---
+
+## ⚙️ Konfigurasi
+
+### Konfigurasi Aplikasi
+
+#### `config/app.php`
+
+Pengaturan dasar aplikasi seperti nama, timezone, dan service providers.
+
+#### `config/passport.php`
+
+Pengaturan OAuth 2.0 dan token expiration:
+
+```php
+'token_expiration_time' => 31536000, // 1 tahun
+'refresh_token_expiration_time' => 63072000, // 2 tahun
+```
+
+#### `config/auth.php`
+
+Konfigurasi guard dan provider untuk autentikasi.
+
+### Konfigurasi Database
+
+Pastikan koneksi database di `.env` sudah benar:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sso_rsd_balung
+DB_USERNAME=root
+DB_PASSWORD=your_password
+```
+
+### Konfigurasi Mail (Opsional)
+
+Untuk notifikasi email:
+
+```env
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=465
+MAIL_USERNAME=your_email
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@rsdbaling.id
+MAIL_FROM_NAME="SSO RSD Balung"
+```
+
+---
+
+## 💻 Penggunaan
+
+### Memulai Development Server
+
+```bash
+php artisan serve
+```
+
+Aplikasi akan berjalan di `http://localhost:8000`
+
+### Development dengan File Watching
+
+```bash
+npm run dev
+```
+
+### Production Build
+
+```bash
+npm run build
+```
+
+### Running Tests
+
+```bash
+php artisan test
+```
+
+---
+
+## 📁 Struktur Proyek
+
+```
+sso-passport/
+├── app/                    # Kode aplikasi utama
+│   ├── Http/              # Controllers, Middleware, Requests
+│   ├── Models/            # Eloquent Models
+│   └── Providers/         # Service Providers
+├── bootstrap/             # Bootstrap files
+├── config/                # Konfigurasi aplikasi
+├── database/              # Migrations, Factories, Seeders
+├── public/                # Aset publik (images, files)
+├── resources/             # Views, CSS, JavaScript
+│   ├── css/
+│   ├── js/
+│   └── views/
+├── routes/                # Route definitions
+├── storage/               # Logs, cache, OAuth keys
+├── tests/                 # Unit & Feature Tests
+├── vendor/                # Composer dependencies
+├── .env.example           # Environment template
+├── artisan               # Laravel CLI
+├── composer.json         # PHP dependencies
+├── package.json          # Node dependencies
+└── README.md             # Dokumentasi (file ini)
+```
+
+## 👥 Tim Pengembang
+
+**SSO RSD Balung** dikembangkan oleh mahasiswa dan dosen dari:
+
+- **Fasilkom UNEJ** (Fakultas Ilmu Komputer, Universitas Negeri Jember)
+- **RSD Balung** (Rumah Sakit Daerah Balung)
+
+---
+
+## 📞 Support & Kontribusi
+
+Untuk dukungan teknis atau kontribusi, silakan hubungi tim pengembang melalui:
+
+- **GitHub Issues**: [Ahmad Rahardan/sso-passport](https://github.com/ahmadrahardan/sso-passport)
+- **Email**: [hubungi@rsdbaling.id](mailto:hubungi@rsdbaling.id)
+
+---
+
+## 🔄 Changelog
+
+Lihat [CHANGELOG](CHANGELOG.md) untuk riwayat perubahan dan updates terbaru.
+
+---
+
+**Dikembangkan dengan ❤️ oleh Fasilkom UNEJ untuk RSD Balung**
