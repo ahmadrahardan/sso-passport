@@ -1,4 +1,5 @@
-<div class="w-56 xl:w-64 flex-shrink-0 bg-gradient-to-t from-blue-900 to-blue-600 text-white shadow-lg flex flex-col h-full">
+<div
+    class="w-56 xl:w-64 flex-shrink-0 bg-gradient-to-b from-[#057BFE] to-[#013F93] text-white shadow-lg flex flex-col h-full">
 
     <div class="border-b border-white h-20 flex items-center justify-center">
         <img src="{{ asset('images/logowhite.png') }}" alt="Logo RSDB" class="h-[65px] w-auto object-contain">
@@ -29,7 +30,7 @@
 
     <div class="border-t border-white h-20 px-4 py-4">
         <a href="{{ route('sso.logout') }}"
-           class="px-4 py-3 text-sm font-medium rounded-lg flex items-center hover:bg-blue-500 transition-colors">
+            class="px-4 py-3 text-sm font-medium rounded-lg flex items-center hover:bg-blue-500 transition-colors">
             <x-icons.logout class="mr-3" />
             Logout
         </a>
