@@ -2,7 +2,7 @@
     <div class="flex flex-wrap gap-12 justify-start items-start h-full">
 
         {{-- Card Dummy untuk Super Admin --}}
-        @if(Auth::user()->hasRole('super-admin'))
+        @if (Auth::user()->hasRole('super-admin'))
             <div class="relative w-full sm:w-72 md:w-80">
                 <a href="{{ url('/users') }}"
                     class="block bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700

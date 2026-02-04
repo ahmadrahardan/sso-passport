@@ -18,11 +18,11 @@ class UserManagementController extends Controller
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
+                        ->orWhere('email', 'like', "%{$search}%");
                 });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
         if ($request->ajax()) {
             return response()->json([
@@ -33,11 +33,11 @@ class UserManagementController extends Controller
                 // Pagination metadata
                 'pagination' => [
                     'current_page' => $users->currentPage(),
-                    'last_page'    => $users->lastPage(),
-                    'per_page'     => $users->perPage(),
-                    'total'        => $users->total(),
-                    'from'         => $users->firstItem(),
-                    'to'           => $users->lastItem(),
+                    'last_page' => $users->lastPage(),
+                    'per_page' => $users->perPage(),
+                    'total' => $users->total(),
+                    'from' => $users->firstItem(),
+                    'to' => $users->lastItem(),
                 ]
             ]);
         }
@@ -71,7 +71,7 @@ class UserManagementController extends Controller
             ],
             [
                 'name.required' => 'Username wajib diisi.',
-                'name.unique'   => 'Username sudah digunakan.',
+                'name.unique' => 'Username sudah digunakan.',
                 'email.required' => 'Email wajib diisi.',
                 'email.email' => 'Format email tidak valid.',
                 'email.unique' => 'Email sudah terdaftar.',
@@ -119,7 +119,7 @@ class UserManagementController extends Controller
             ],
             [
                 'name.required' => 'Username wajib diisi.',
-                'name.unique'   => 'Username sudah digunakan.',
+                'name.unique' => 'Username sudah digunakan.',
                 'email.required' => 'Email wajib diisi.',
                 'email.email' => 'Format email tidak valid.',
                 'email.unique' => 'Email sudah digunakan user lain.',

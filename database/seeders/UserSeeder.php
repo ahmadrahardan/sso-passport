@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -14,22 +14,78 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $super = User::updateOrCreate(
-            ['email' => 'bluepylox@gmail.com'],
-            ['name' => 'Rayyaa', 'password' => Hash::make('password')]
-        );
-        $super->syncRoles(['super-admin']);
+        $roles = [
+            'super-admin',
+            'admin-gudang-umum',
+            'tim-teknis',
+            'tim-ppk',
+            'instalasi',
+            'penanggung-jawab',
+        ];
 
-        $ppk = User::updateOrCreate(
-            ['email' => 'timppk@gmail.com'],
-            ['name' => 'TimPPK', 'password' => Hash::make('password')]
-        );
-        $ppk->syncRoles(['tim-ppk']);
+        foreach ($roles as $role) {
+            Role::updateOrCreate(['name' => $role, 'guard_name' => 'web']);
+        }
 
-        $instalasi = User::updateOrCreate(
-            ['email' => 'instalasi@gmail.com'],
-            ['name' => 'Instalasi', 'password' => Hash::make('password')]
-        );
-        $instalasi->syncRoles(['instalasi']);
+        $users = [
+            [
+                'name' => 'Fauzul Akbar',
+                'email' => 'fauzulakbar2575@gmail.com',
+                'role' => 'super-admin',
+            ],
+            [
+                'name' => 'Rayya',
+                'email' => 'bluepylox@gmail.com',
+                'role' => 'super-admin',
+            ],
+            [
+                'name' => 'Tim PPK',
+                'email' => 'timppk@gmail.com',
+                'role' => 'tim-ppk',
+            ],
+            [
+                'name' => 'Instalasi',
+                'email' => 'instalasi@gmail.com',
+                'role' => 'instalasi',
+            ],
+            [
+                'name' => 'Admin Gudang',
+                'email' => 'admingudang@gmail.com',
+                'role' => $roles['ADMIN_GUDANG']
+            ],
+            [
+                'name' => 'Tim Teknis',
+                'email' => 'timteknis@gmail.com',
+                'role' => $roles['TEKNIS']
+            ],
+            [
+                'name' => 'Tim PPK',
+                'email' => 'timppk@gmail.com',
+                'role' => $roles['PPK']
+            ],
+            [
+                'name' => 'Penanggung Jawab',
+                'email' => 'penanggungjawab@gmail.com',
+                'role' => $roles['PENANGGUNG_JAWAB']
+            ],
+            [
+                'name' => 'Instalasi',
+                'email' => 'instalasi@gmail.com',
+                'role' => $roles['INSTALASI']
+            ],
+        ];
+
+        foreach ($users as $userData) {
+            $user = User::updateOrCreate(
+                ['email' => $userData['email']],
+                [
+                    'name' => $userData['name'],
+                    'password' => Hash::make('password'),
+                    'email_verified_at' => now(),
+                ]
+            );
+
+            $user->syncRoles($userData['role']);
+        }
     }
 }

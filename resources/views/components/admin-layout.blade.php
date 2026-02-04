@@ -15,7 +15,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin.js'])
 </head>
 
-<body class="bg-gradient-to-t from-blue-100 to-indigo-50 overflow-hidden h-screen">
+<body class="bg-[#f1f2f3] overflow-hidden h-screen">
 
     <div class="flex h-full min-w-0 overflow-hidden">
 
