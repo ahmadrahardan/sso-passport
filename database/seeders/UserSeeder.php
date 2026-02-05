@@ -39,39 +39,29 @@ class UserSeeder extends Seeder
                 'role' => 'super-admin',
             ],
             [
-                'name' => 'Tim PPK',
-                'email' => 'timppk@gmail.com',
-                'role' => 'tim-ppk',
-            ],
-            [
-                'name' => 'Instalasi',
-                'email' => 'instalasi@gmail.com',
-                'role' => 'instalasi',
-            ],
-            [
                 'name' => 'Admin Gudang',
                 'email' => 'admingudang@gmail.com',
-                'role' => $roles['ADMIN_GUDANG']
+                'role' => 'admin-gudang-umum'
             ],
             [
                 'name' => 'Tim Teknis',
                 'email' => 'timteknis@gmail.com',
-                'role' => $roles['TEKNIS']
+                'role' => 'tim-teknis'
             ],
             [
                 'name' => 'Tim PPK',
                 'email' => 'timppk@gmail.com',
-                'role' => $roles['PPK']
+                'role' => 'tim-ppk'
             ],
             [
                 'name' => 'Penanggung Jawab',
                 'email' => 'penanggungjawab@gmail.com',
-                'role' => $roles['PENANGGUNG_JAWAB']
+                'role' => 'penanggung-jawab'
             ],
             [
                 'name' => 'Instalasi',
                 'email' => 'instalasi@gmail.com',
-                'role' => $roles['INSTALASI']
+                'role' => 'instalasi'
             ],
         ];
 
